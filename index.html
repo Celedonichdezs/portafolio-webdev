@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desarrollo Web Profesional | Portafolio</title>
+    <meta name="description" content="Creamos sitios web profesionales para tu negocio. Diseño moderno, rápido y optimizado.">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --secondary: #10b981;
+            --dark: #0f172a;
+            --light: #f8fafc;
+            --accent: #f59e0b;
+            --text: #1e293b;
+            --text-light: #64748b;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--dark) 0%, #1e293b 100%);
+            color: white;
+            padding: 20px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: white;
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--secondary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--secondary);
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 180px 0 100px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 56px;
+            margin-bottom: 20px;
+            font-weight: 800;
+        }
+
+        .hero .tagline {
+            font-size: 24px;
+            margin-bottom: 40px;
+            opacity: 0.95;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 15px 40px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 18px;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: white;
+            color: var(--primary);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(255,255,255,0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            color: var(--primary);
+        }
+
+        section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 42px;
+            margin-bottom: 20px;
+            color: var(--dark);
+            font-weight: 800;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 18px;
+            color: var(--text-light);
+            margin-bottom: 60px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .portfolio-item {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .portfolio-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+        }
+
+        .portfolio-image {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 80px;
+            color: white;
+        }
+
+        .portfolio-content {
+            padding: 30px;
+        }
+
+        .portfolio-content h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+
+        .portfolio-content p {
+            color: var(--text-light);
+            margin-bottom: 20px;
+            line-height: 1.7;
+        }
+
+        .portfolio-tags {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            background: var(--light);
+            color: var(--primary);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .services {
+            background: var(--light);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+
+        .service-card {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 20px;
+            text-align: center;
+            transition: all 0.3s;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(99,102,241,0.15);
+        }
+
+        .service-icon {
+            font-size: 56px;
+            margin-bottom: 20px;
+        }
+
+        .service-card h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+
+        .service-card p {
+            color: var(--text-light);
+            line-height: 1.7;
+        }
+
+        .packages {
+            background: white;
+        }
+
+        .packages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+
+        .package-card {
+            background: white;
+            border: 3px solid var(--light);
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .package-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(99,102,241,0.2);
+        }
+
+        .package-card.featured {
+            border-color: var(--primary);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .package-badge {
+            background: var(--accent);
+            color: white;
+            padding: 5px 20px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 700;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        .package-card h3 {
+            font-size: 28px;
+            margin-bottom: 15px;
+        }
+
+        .package-card.featured h3 {
+            color: white;
+        }
+
+        .package-price {
+            font-size: 48px;
+            font-weight: 800;
+            margin: 20px 0;
+            color: var(--primary);
+        }
+
+        .package-card.featured .package-price {
+            color: white;
+        }
+
+        .package-features {
+            list-style: none;
+            margin: 30px 0;
+            text-align: left;
+        }
+
+        .package-features li {
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+        }
+
+        .package-card.featured .package-features li {
+            border-bottom-color: rgba(255,255,255,0.2);
+        }
+
+        .package-features li:before {
+            content: "✓ ";
+            color: var(--secondary);
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .package-card.featured .package-features li:before {
+            color: white;
+        }
+
+        .testimonials {
+            background: var(--light);
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+
+        .testimonial-card {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            color: var(--text);
+            margin-bottom: 20px;
+            line-height: 1.8;
+            font-size: 16px;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 20px;
+        }
+
+        .author-info h4 {
+            color: var(--dark);
+            margin-bottom: 5px;
+        }
+
+        .author-info p {
+            color: var(--text-light);
+            font-size: 14px;
+        }
+
+        .stars {
+            color: var(--accent);
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+
+        .cta-section {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            text-align: center;
+            padding: 100px 0;
+        }
+
+        .cta-section h2 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .cta-section p {
+            font-size: 20px;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 60px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 20px;
+            color: var(--secondary);
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            display: block;
+            margin-bottom: 10px;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: var(--secondary);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            background: var(--secondary);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            opacity: 0.7;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .hero .tagline {
+                font-size: 18px;
+            }
+
+            .section-title {
+                font-size: 32px;
+            }
+
+            .portfolio-grid,
+            .services-grid,
+            .packages-grid,
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+            }
+
+            .package-card.featured {
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <a href="#" class="logo">
+                <span>⚡</span> WebDev Pro
+            </a>
+            <ul class="nav-links">
+                <li><a href="#portafolio">Portafolio</a></li>
+                <li><a href="#servicios">Servicios</a></li>
+                <li><a href="#paquetes">Paquetes</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>Creamos Sitios Web que Impulsan tu Negocio</h1>
+            <p class="tagline">Diseño profesional, moderno y optimizado para resultados reales</p>
+            <div class="cta-buttons">
+                <a href="#paquetes" class="btn btn-primary">Ver Paquetes</a>
+                <a href="#portafolio" class="btn btn-secondary">Ver Trabajos</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="portafolio" class="portfolio">
+        <div class="container">
+            <h2 class="section-title">Proyectos Destacados</h2>
+            <p class="section-subtitle">Sitios web profesionales que hemos creado para nuestros clientes</p>
+            
+            <div class="portfolio-grid">
+                <div class="portfolio-item">
+                    <div class="portfolio-image">💻</div>
+                    <div class="portfolio-content">
+                        <h3>Servicios IT Profesionales</h3>
+                        <p>Sitio web completo para empresa de tecnología con sección de servicios, contacto y portafolio.</p>
+                        <div class="portfolio-tags">
+                            <span class="tag">Responsive</span>
+                            <span class="tag">Moderno</span>
+                            <span class="tag">SEO</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="portfolio-item">
+                    <div class="portfolio-image">🏥</div>
+                    <div class="portfolio-content">
+                        <h3>Clínica Médica</h3>
+                        <p>Landing page para clínica con sistema de citas en línea y información de servicios médicos.</p>
+                        <div class="portfolio-tags">
+                            <span class="tag">Sistema de Citas</span>
+                            <span class="tag">WhatsApp</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="portfolio-item">
+                    <div class="portfolio-image">🍕</div>
+                    <div class="portfolio-content">
+                        <h3>Restaurante Local</h3>
+                        <p>Sitio web con menú digital, galería de fotos y sistema de pedidos por WhatsApp.</p>
+                        <div class="portfolio-tags">
+                            <span class="tag">Menú Digital</span>
+                            <span class="tag">Galería</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="portfolio-item">
+                    <div class="portfolio-image">🏪</div>
+                    <div class="portfolio-content">
+                        <h3>Tienda de Ropa</h3>
+                        <p>E-commerce básico con catálogo de productos, carrito de compras y pasarela de pago.</p>
+                        <div class="portfolio-tags">
+                            <span class="tag">E-commerce</span>
+                            <span class="tag">Pagos en línea</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="portfolio-item">
+                    <div class="portfolio-image">🏋️</div>
+                    <div class="portfolio-content">
+                        <h3>Gimnasio Fitness</h3>
+                        <p>Sitio con horarios de clases, planes de membresía y registro en línea.</p>
+                        <div class="portfolio-tags">
+                            <span class="tag">Sistema de Registro</span>
+                            <span class="tag">Blog</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="portfolio-item">
+                    <div class="portfolio-image">📚</div>
+                    <div class="portfolio-content">
+                        <h3>Centro Educativo</h3>
+                        <p>Plataforma educativa con información de cursos, inscripciones y área de recursos.</p>
+                        <div class="portfolio-tags">
+                            <span class="tag">Portal Educativo</span>
+                            <span class="tag">Multilenguaje</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="servicios" class="services">
+        <div class="container">
+            <h2 class="section-title">Nuestros Servicios</h2>
+            <p class="section-subtitle">Soluciones web completas para llevar tu negocio al siguiente nivel</p>
+            
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">🎨</div>
+                    <h3>Diseño Web Profesional</h3>
+                    <p>Diseños modernos, atractivos y optimizados para conversión. Tu marca destacará en internet.</p>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">💻</div>
+                    <h3>Desarrollo Personalizado</h3>
+                    <p>Sitios web a medida con las funcionalidades específicas que tu negocio necesita.</p>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">📱</div>
+                    <h3>Diseño Responsivo</h3>
+                    <p>Tu sitio se verá perfecto en cualquier dispositivo: móvil, tablet o desktop.</p>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">🚀</div>
+                    <h3>Optimización SEO</h3>
+                    <p>Posicionamiento en Google para que tus clientes te encuentren fácilmente.</p>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">🔒</div>
+                    <h3>Seguridad SSL</h3>
+                    <p>Certificado de seguridad incluido. Tu sitio será confiable y seguro.</p>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">⚡</div>
+                    <h3>Hosting Premium</h3>
+                    <p>Servidores ultra rápidos en todo el mundo. Tu sitio cargará en segundos.</p>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">📊</div>
+                    <h3>Analytics & Reportes</h3>
+                    <p>Google Analytics integrado para monitorear visitas y comportamiento de usuarios.</p>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">🛠️</div>
+                    <h3>Soporte Técnico</h3>
+                    <p>Te acompañamos después del lanzamiento con mantenimiento y actualizaciones.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="paquetes" class="packages">
+        <div class="container">
+            <h2 class="section-title">Paquetes y Precios</h2>
+            <p class="section-subtitle">Elige el paquete perfecto para tu negocio</p>
+            
+            <div class="packages-grid">
+                <div class="package-card">
+                    <h3>Básico</h3>
+                    <div class="package-price">$5,000</div>
+                    <p>Ideal para emprendedores</p>
+                    <ul class="package-features">
+                        <li>Landing Page profesional</li>
+                        <li>Diseño responsivo</li>
+                        <li>Formulario de contacto</li>
+                        <li>Hosting incluido (1 año)</li>
+                        <li>SSL/HTTPS</li>
+                        <li>2 revisiones de diseño</li>
+                        <li>Entrega en 5-7 días</li>
+                    </ul>
+                    <a href="#contacto" class="btn btn-secondary">Solicitar</a>
+                </div>
+
+                <div class="package-card featured">
+                    <div class="package-badge">MÁS POPULAR</div>
+                    <h3>Profesional</h3>
+                    <div class="package-price">$10,000</div>
+                    <p>Perfecto para negocios</p>
+                    <ul class="package-features">
+                        <li>Todo del paquete Básico</li>
+                        <li>Hasta 5 páginas</li>
+                        <li>Dominio personalizado (.com.mx)</li>
+                        <li>3 emails profesionales</li>
+                        <li>Google Analytics</li>
+                        <li>SEO básico</li>
+                        <li>Blog integrado</li>
+                        <li>1 mes soporte gratis</li>
+                        <li>Entrega en 10-15 días</li>
+                    </ul>
+                    <a href="#contacto" class="btn btn-primary">Solicitar</a>
+                </div>
+
+                <div class="package-card">
+                    <h3>Empresarial</h3>
+                    <div class="package-price">$20,000</div>
+                    <p>Para empresas establecidas</p>
+                    <ul class="package-features">
+                        <li>Todo del paquete Profesional</li>
+                        <li>Páginas ilimitadas</li>
+                        <li>Sitio multiidioma</li>
+                        <li>Sistema de citas/cotizaciones</li>
+                        <li>Chat en vivo</li>
+                        <li>E-commerce básico</li>
+                        <li>SEO avanzado</li>
+                        <li>3 meses soporte</li>
+                        <li>Capacitación incluida</li>
+                        <li>Entrega en 20-30 días</li>
+                    </ul>
+                    <a href="#contacto" class="btn btn-secondary">Solicitar</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials">
+        <div class="container">
+            <h2 class="section-title">Lo Que Dicen Nuestros Clientes</h2>
+            <p class="section-subtitle">Testimonios reales de negocios que confiaron en nosotros</p>
+            
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="stars">⭐⭐⭐⭐⭐</div>
+                    <p class="testimonial-text">"Excelente trabajo. Mi sitio web quedó profesional y moderno. Ahora recibo más clientes gracias a mi presencia en internet. Totalmente recomendado."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">JM</div>
+                        <div class="author-info">
+                            <h4>Juan Martínez</h4>
+                            <p>Taller Mecánico</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="stars">⭐⭐⭐⭐⭐</div>
+                    <p class="testimonial-text">"Muy profesional y rápido. Me entregaron mi sitio web en tiempo récord y quedó exactamente como lo imaginaba. El soporte posterior también ha sido excelente."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">AL</div>
+                        <div class="author-info">
+                            <h4>Ana López</h4>
+                            <p>Boutique de Ropa</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="stars">⭐⭐⭐⭐⭐</div>
+                    <p class="testimonial-text">"La mejor inversión para mi negocio. Ahora tengo una presencia profesional en internet y mis clientes pueden encontrarme fácilmente. Gracias por el excelente servicio."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">CR</div>
+                        <div class="author-info">
+                            <h4>Carlos Ramírez</h4>
+                            <p>Asesoría Legal</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="container">
+            <h2>¿Listo Para Llevar tu Negocio al Siguiente Nivel?</h2>
+            <p>Contáctanos hoy y obtén una consulta gratuita</p>
+            <a href="#contacto" class="btn btn-primary">Solicitar Cotización Gratis</a>
+        </div>
+    </section>
+
+    <footer id="contacto">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Sobre Nosotros</h3>
+                    <p>Creamos sitios web profesionales que ayudan a los negocios a crecer en el mundo digital.</p>
+                    <div class="social-links">
+                        <a href="#" title="Facebook">📘</a>
+                        <a href="#" title="Instagram">📷</a>
+                        <a href="#" title="LinkedIn">💼</a>
+                        <a href="#" title="WhatsApp">💬</a>
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Servicios</h3>
+                    <a href="#servicios">Diseño Web</a>
+                    <a href="#servicios">Desarrollo Web</a>
+                    <a href="#servicios">SEO</a>
+                    <a href="#servicios">Hosting</a>
+                    <a href="#servicios">Mantenimiento</a>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Contacto</h3>
+                    <p>📧 ctci.chs@gmail.com</p>
+                    <p>📧 chs.learn@outlook.com</p>
+                    <p>📱 722 546 8979</p>
+                    <p>📍 Cuernavaca, Morelos</p>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Horarios</h3>
+                    <p>Lunes a Viernes:</p>
+                    <p>9:00 AM - 6:00 PM</p>
+                    <p>Sábados:</p>
+                    <p>9:00 AM - 2:00 PM</p>
+                </div>
+            </div>
+
+            <div class="copyright">
+                <p>&copy; 2024 Desarrollo Web Profesional. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
